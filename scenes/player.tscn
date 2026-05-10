@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://hi1temhhpjtk"]
+
+[ext_resource type="Texture2D" uid="uid://b5jtrxfrgbsfs" path="res://assets/Characters/Basic Charakter Spritesheet.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://c67namc5kcv4" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="AudioStream" uid="uid://dyof5m3guv0a3" path="res://assets/sounds/jump.wav" id="3_qhqgy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4r1p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(12.75, 16)
+
+[node name="Player" type="CharacterBody2D" unique_id=158985382]
+scale = Vector2(1.3, 1.3)
+script = ExtResource("1_g2els")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1746821001]
+sprite_frames = SubResource("SpriteFrames_y4r1p")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1791626491]
+position = Vector2(0.125, 0)
+shape = SubResource("RectangleShape2D_g2els")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=799431101]
+stream = ExtResource("3_qhqgy")
