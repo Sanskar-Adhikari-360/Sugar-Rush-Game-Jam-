@@ -3,12 +3,13 @@ extends CharacterBody2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var dash_timer: Timer = $DashTimer
 
-
 var SPEED = 300.0
 const DASH_SPEED = 1000.0
 var JUMP_VELOCITY = -800.0
 var is_dashing = false
 var can_dash = false # only active when player collects the dash poweup
+var GRAVITY := 2000
+var  FALL_GRAVITY := 4500
 
 # Player states defined
 var PlayerState = {
@@ -16,10 +17,19 @@ var PlayerState = {
 	running = false
 }
 
+func get_gravityy(velocity: Vector2):
+	if velocity.y < 0:
+		return GRAVITY 
+	return FALL_GRAVITY
+
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += get_gravityy(velocity) * delta
+	
+	if Input.is_action_just_released("Jump") and velocity.y < 0:
+		velocity.y = JUMP_VELOCITY / 4
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
