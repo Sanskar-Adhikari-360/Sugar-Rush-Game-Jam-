@@ -62,3 +62,9 @@ shape = SubResource("RectangleShape2D_g2els")
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=799431101]
 stream = ExtResource("3_qhqgy")
+
+[node name="DashTimer" type="Timer" parent="." unique_id=800737296]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
