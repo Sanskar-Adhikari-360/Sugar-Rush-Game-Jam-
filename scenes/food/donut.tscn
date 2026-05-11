@@ -1,36 +1,36 @@
-[gd_scene format=3 uid="uid://bdi2cdisddv0l"]
+[gd_scene format=3 uid="uid://dsyeokyyy4edg"]
 
-[ext_resource type="Script" uid="uid://dtqietbk0l0tm" path="res://scripts/powerup/pudding.gd" id="1_ajd5b"]
-[ext_resource type="Texture2D" uid="uid://bh54vmbfki6wv" path="res://assets/Desserts/Collected.png" id="2_3tq4r"]
-[ext_resource type="Texture2D" uid="uid://bx3ll0j1b1i2y" path="res://assets/Desserts/Donut.png" id="3_712mp"]
-[ext_resource type="AudioStream" uid="uid://dlo10lmjbfncb" path="res://assets/sounds/collected.wav" id="4_712mp"]
+[ext_resource type="Script" uid="uid://dtqietbk0l0tm" path="res://scripts/powerup/pudding.gd" id="1_jc8x2"]
+[ext_resource type="Texture2D" uid="uid://bh54vmbfki6wv" path="res://assets/Desserts/Collected.png" id="2_5m73e"]
+[ext_resource type="Texture2D" uid="uid://bx3ll0j1b1i2y" path="res://assets/Desserts/Donut.png" id="3_jc8x2"]
+[ext_resource type="AudioStream" uid="uid://dlo10lmjbfncb" path="res://assets/sounds/collected.wav" id="4_32f72"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_712mp"]
-atlas = ExtResource("2_3tq4r")
+atlas = ExtResource("2_5m73e")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wfjma"]
-atlas = ExtResource("2_3tq4r")
+atlas = ExtResource("2_5m73e")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bqymp"]
-atlas = ExtResource("2_3tq4r")
+atlas = ExtResource("2_5m73e")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nymx5"]
-atlas = ExtResource("2_3tq4r")
+atlas = ExtResource("2_5m73e")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlgvg"]
-atlas = ExtResource("2_3tq4r")
+atlas = ExtResource("2_5m73e")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e7sp5"]
-atlas = ExtResource("2_3tq4r")
+atlas = ExtResource("2_5m73e")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5m73e"]
-atlas = ExtResource("3_712mp")
+atlas = ExtResource("3_jc8x2")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c1vx5"]
@@ -70,8 +70,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ajd5b"]
 radius = 8.0
 
-[node name="Pudding" type="Area2D" unique_id=3883670]
-script = ExtResource("1_ajd5b")
+[node name="Donut" type="Area2D" unique_id=3883670]
+script = ExtResource("1_jc8x2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=6714657]
 position = Vector2(0, 1)
@@ -84,7 +84,7 @@ position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ajd5b")
 
 [node name="CollectedSound" type="AudioStreamPlayer2D" parent="." unique_id=1847110361]
-stream = ExtResource("4_712mp")
+stream = ExtResource("4_32f72")
 pitch_scale = 1.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

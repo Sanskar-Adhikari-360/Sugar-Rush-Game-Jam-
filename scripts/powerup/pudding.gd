@@ -3,13 +3,16 @@ extends Area2D
 @onready var collected_sound: AudioStreamPlayer2D = $CollectedSound
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
-signal collected
+@export_enum("speed", "jump", "dash")
+var effect_type: String
+
+signal collected(effect_type)
 
 
 func _on_body_entered(_body: Node2D) -> void:
 	FoodAnimate.play("collected")
 	collected_sound.play()
-	collected.emit()
+	emit_signal("collected", effect_type)
 	call_deferred("_disable_collison")
 	
 func _disable_collison() -> void:

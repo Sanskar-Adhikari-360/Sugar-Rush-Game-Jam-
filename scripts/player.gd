@@ -52,3 +52,13 @@ func _physics_process(delta: float) -> void:
 		animate.flip_h = true
 		
 	move_and_slide()
+	
+	
+	# applying effect
+	
+func apply_effect(effect_type: String) -> void:
+	match effect_type:
+		"speed":
+			print("Speed increased")
+		"jump":
+			print("jump boosted")

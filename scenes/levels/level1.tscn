@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bu6s84wix3gpc" path="res://assets/Tilemap/Terrain (16x16).png" id="1_x6ivy"]
 [ext_resource type="PackedScene" uid="uid://hi1temhhpjtk" path="res://scenes/player.tscn" id="2_4tcl0"]
 [ext_resource type="PackedScene" uid="uid://bdi2cdisddv0l" path="res://scenes/food/pudding.tscn" id="4_bfxgj"]
+[ext_resource type="PackedScene" uid="uid://dsyeokyyy4edg" path="res://scenes/food/donut.tscn" id="5_dywbp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4tcl0"]
 texture = ExtResource("1_x6ivy")
@@ -248,3 +249,8 @@ position = Vector2(81.66667, 168)
 
 [node name="Pudding" parent="Food" unique_id=3883670 instance=ExtResource("4_bfxgj")]
 position = Vector2(135.66667, 33.666668)
+effect_type = "speed"
+
+[node name="Donut" parent="Food" unique_id=1460188285 instance=ExtResource("5_dywbp")]
+position = Vector2(330.33334, 118.66667)
+effect_type = "jump"

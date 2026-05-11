@@ -1,4 +1,5 @@
 extends Node2D
+@onready var player = $LevelRoot/Player
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,7 +15,11 @@ func _setup_level() -> void:
 	var food = $LevelRoot.get_node_or_null("Food")
 	if food:
 		for pudding in food.get_children():
-			pudding.collected.connect(message)
+			if pudding.has_signal("collected"):
+				pudding.collected.connect(_on_food_collected)
 
 func message() -> void:
 	print("Pudding found")
+	
+func _on_food_collected(effect_type: String) -> void:
+	player.apply_effect(effect_type)
