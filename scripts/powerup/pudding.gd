@@ -5,14 +5,15 @@ extends Area2D
 
 @export_enum("speed", "jump", "dash")
 var effect_type: String
+@export var sugar_amount: int = 10
 
-signal collected(effect_type)
+signal collected(effect_type,sugar_amount)
 
 
 func _on_body_entered(_body: Node2D) -> void:
 	FoodAnimate.play("collected")
 	collected_sound.play()
-	emit_signal("collected", effect_type)
+	emit_signal("collected", effect_type,sugar_amount)
 	call_deferred("_disable_collison")
 	
 func _disable_collison() -> void:

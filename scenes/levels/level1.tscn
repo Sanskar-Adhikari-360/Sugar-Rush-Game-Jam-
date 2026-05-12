@@ -250,9 +250,24 @@ position = Vector2(81.66667, 168)
 
 [node name="Pudding" parent="Food" unique_id=3883670 instance=ExtResource("4_bfxgj")]
 position = Vector2(138, 34.666668)
+sugar_amount = 10
 
 [node name="Donut" parent="Food" unique_id=1460188285 instance=ExtResource("5_dywbp")]
 position = Vector2(330.33334, 118.66667)
+sugar_amount = 20
 
 [node name="Brownie" parent="Food" unique_id=340609987 instance=ExtResource("6_1seuy")]
 position = Vector2(169, 87.66667)
+sugar_amount = 20
+
+[node name="Brownie2" parent="Food" unique_id=1207800603 instance=ExtResource("6_1seuy")]
+position = Vector2(387.33334, 209.33334)
+sugar_amount = 10
+
+[node name="Donut2" parent="Food" unique_id=566553333 instance=ExtResource("5_dywbp")]
+position = Vector2(33.666668, 210.66667)
+sugar_amount = 20
+
+[node name="Pudding2" parent="Food" unique_id=950169234 instance=ExtResource("4_bfxgj")]
+position = Vector2(194, 213.66667)
+sugar_amount = 20

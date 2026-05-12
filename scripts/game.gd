@@ -21,5 +21,5 @@ func _setup_level() -> void:
 func message() -> void:
 	print("Pudding found")
 
-func _on_food_collected(effect_type: String) -> void:
-	player.apply_effect(effect_type)
+func _on_food_collected(effect_type: String, sugar: int) -> void:
+	player.apply_effect(effect_type, sugar)

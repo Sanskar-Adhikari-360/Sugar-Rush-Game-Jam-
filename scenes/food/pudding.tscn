@@ -73,6 +73,7 @@ radius = 8.0
 [node name="Pudding" type="Area2D" unique_id=3883670]
 script = ExtResource("1_ajd5b")
 effect_type = "speed"
+sugar_amount = 35
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=6714657]
 position = Vector2(0, 1)
