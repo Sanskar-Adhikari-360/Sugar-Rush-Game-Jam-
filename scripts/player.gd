@@ -4,6 +4,12 @@ extends CharacterBody2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var dash_timer: Timer = $DashTimer
 
+signal change_progress_bar(value: int)
+
+@onready var sugar_label: Label = $"../sugar label"
+
+
+
 # ── Base stats (never modify these directly — multiplier handles scaling) ──
 const BASE_SPEED          : float = 300.0
 const BASE_DASH_SPEED     : float = BASE_SPEED + 550
@@ -35,6 +41,9 @@ var is_penalized  : bool  = false
 # ── Player state ───────────────────────────────────────────────────────────
 var PlayerState = { idle = true, running = false }
 
+# ----- Sugar degradation value ------
+const MAX_DRAIN_RATE : float = 3.0   # points/sec drained at sugar = 100
+const DRAIN_FLOOR    : float = 5.0   # sugar level where drain stops completely
 
 # ── Sugar formulas ─────────────────────────────────────────────────────────
 
@@ -62,6 +71,7 @@ func get_jump_velocity() -> float:
 
 func consume_sugar(amount: float) -> void:
 	sugar_level += amount
+	change_progress_bar.emit(sugar_level)
 	if sugar_level > SUGAR_THRESHOLD and not is_penalized:
 		is_penalized  = true
 		penalty_timer = get_penalty_duration()
@@ -74,6 +84,7 @@ func get_gravityy(vel: Vector2) -> int:
 	return GRAVITY if vel.y < 0 else FALL_GRAVITY
 
 func _physics_process(delta: float) -> void:
+	sugar_label.text = str(sugar_level)
 
 	# FIX 1: tick the penalty timer down every frame
 	if is_penalized:
@@ -83,6 +94,11 @@ func _physics_process(delta: float) -> void:
 			penalty_timer = 0.0
 			sugar_level   = SUGAR_THRESHOLD  # bleed back to safe threshold
 			print("✓ Penalty lifted")
+
+  # ── Natural sugar drain (only below threshold, never penalised) ──
+	if sugar_level > DRAIN_FLOOR and not is_penalized:
+		var drain_rate := MAX_DRAIN_RATE * (sugar_level / SUGAR_THRESHOLD)
+		sugar_level = maxf(DRAIN_FLOOR, sugar_level - drain_rate * delta)
 
 	var speed : float = get_speed()
 	var jump  : float = get_jump_velocity()

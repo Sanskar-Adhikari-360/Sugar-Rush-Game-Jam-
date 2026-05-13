@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://ds1doqg3ygdo8"]
+
+[ext_resource type="Texture2D" uid="uid://b42dyp1i5gw16" path="res://assets/progressBar/empty bar.png" id="1_5ysmq"]
+[ext_resource type="Script" uid="uid://cj86jq7gqbh2n" path="res://scripts/hud.gd" id="1_6fi6k"]
+[ext_resource type="Texture2D" uid="uid://b04lrmoaufjug" path="res://assets/progressBar/blank.png" id="2_6fi6k"]
+[ext_resource type="Texture2D" uid="uid://gblgnd8svlvi" path="res://assets/progressBar/progress.png" id="4_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://c3esvs1op2ut7" path="res://assets/progressBar/second_progress.png" id="5_uo2fv"]
+
+[node name="HUD" type="CanvasLayer" unique_id=432265652]
+script = ExtResource("1_6fi6k")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=854322532]
+z_index = 10
+anchors_preset = -1
+anchor_left = 0.90500003
+anchor_top = 0.397
+anchor_right = 0.90500003
+anchor_bottom = 0.397
+offset_left = 0.5999756
+offset_top = -0.83999634
+offset_right = 32.599976
+offset_bottom = 31.160004
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(5, 5)
+step = 2.0
+fill_mode = 3
+texture_under = ExtResource("2_6fi6k")
+texture_over = ExtResource("1_5ysmq")
+texture_progress = ExtResource("4_uo2fv")
+
+[node name="SecondaryProgressBar" type="TextureProgressBar" parent="." unique_id=76129072]
+z_index = 11
+anchors_preset = -1
+anchor_left = 0.90500003
+anchor_top = 0.39400002
+anchor_right = 0.90500003
+anchor_bottom = 0.39400002
+offset_left = 0.60009766
+offset_top = 1.3199768
+offset_right = 32.600098
+offset_bottom = 33.319977
+scale = Vector2(5, 5)
+min_value = 100.0
+max_value = 200.0
+value = 100.0
+fill_mode = 3
+texture_progress = ExtResource("5_uo2fv")
