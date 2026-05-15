@@ -5,6 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://b04lrmoaufjug" path="res://assets/progressBar/blank.png" id="2_6fi6k"]
 [ext_resource type="Texture2D" uid="uid://gblgnd8svlvi" path="res://assets/progressBar/progress.png" id="4_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://c3esvs1op2ut7" path="res://assets/progressBar/second_progress.png" id="5_uo2fv"]
+[ext_resource type="FontFile" uid="uid://d100j448l7o2t" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="6_047uy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5pdws"]
+font = ExtResource("6_047uy")
 
 [node name="HUD" type="CanvasLayer" unique_id=432265652]
 script = ExtResource("1_6fi6k")
@@ -46,3 +50,15 @@ max_value = 200.0
 value = 100.0
 fill_mode = 3
 texture_progress = ExtResource("5_uo2fv")
+
+[node name="Message" type="Label" parent="." unique_id=1209762805]
+anchors_preset = -1
+anchor_left = 0.42200002
+anchor_top = 0.17400001
+anchor_right = 0.42200002
+anchor_bottom = 0.17400001
+offset_left = -0.16003418
+offset_top = -0.2800064
+offset_right = 363.83997
+offset_bottom = 15.719994
+label_settings = SubResource("LabelSettings_5pdws")

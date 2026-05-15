@@ -4,11 +4,12 @@ extends CharacterBody2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var dash_timer: Timer = $DashTimer
 
-signal change_progress_bar(value: int)
+signal change_progress_bar(value: float)
+signal Message_update(message: String, duration: float)
 
 @onready var sugar_label: Label = $"../sugar label"
 
-
+var m: String
 
 # ── Base stats (never modify these directly — multiplier handles scaling) ──
 const BASE_SPEED          : float = 300.0
@@ -30,11 +31,14 @@ const SUGAR_THRESHOLD : float = 100.0
 const MAX_EXCESS      : float = 100.0
 const MULT_AT_ZERO    : float = 0.5
 const MULT_AT_PEAK    : float = 1.5
-const MULT_FLOOR      : float = 0.2
+const MULT_FLOOR      : float = 0.05
 const MAX_PENALTY_TIME: float = 10.0
 
 # ── Runtime state ──────────────────────────────────────────────────────────
-var sugar_level   : float = 0.0
+var sugar_level : float = 0.0:
+	set(value):
+		sugar_level = value
+		change_progress_bar.emit(sugar_level)
 var penalty_timer : float = 0.0
 var is_penalized  : bool  = false
 
@@ -42,7 +46,7 @@ var is_penalized  : bool  = false
 var PlayerState = { idle = true, running = false }
 
 # ----- Sugar degradation value ------
-const MAX_DRAIN_RATE : float = 3.0   # points/sec drained at sugar = 100
+const MAX_DRAIN_RATE : float = 2.0   # points/sec drained at sugar = 100
 const DRAIN_FLOOR    : float = 5.0   # sugar level where drain stops completely
 
 # ── Sugar formulas ─────────────────────────────────────────────────────────
@@ -69,15 +73,20 @@ func get_jump_velocity() -> float:
 
 # ── Sugar intake ───────────────────────────────────────────────────────────
 
-func consume_sugar(amount: float) -> void:
+func consume_sugar(amount: float, silent: bool = false) -> void:
 	sugar_level += amount
-	change_progress_bar.emit(sugar_level)
+	
 	if sugar_level > SUGAR_THRESHOLD and not is_penalized:
-		is_penalized  = true
+		is_penalized = true
 		penalty_timer = get_penalty_duration()
-		print("⚠ Sugar overload! Penalty: %.1fs" % penalty_timer)
+		Message_update.emit("⚠ SUGAR CRASH! ⚠", 0.0)
+	elif not is_penalized and not silent:
+		Message_update.emit("+ Sugar Rush!", 0.6)
 
-
+	if penalty_timer <= 0.0:
+		is_penalized = false
+	Message_update.emit("✓ RECOVERED", 0.8)
+	
 # ── Physics ────────────────────────────────────────────────────────────────
 
 func get_gravityy(vel: Vector2) -> int:
@@ -86,14 +95,16 @@ func get_gravityy(vel: Vector2) -> int:
 func _physics_process(delta: float) -> void:
 	sugar_label.text = str(sugar_level)
 
-	# FIX 1: tick the penalty timer down every frame
 	if is_penalized:
 		penalty_timer -= delta
 		if penalty_timer <= 0.0:
 			is_penalized  = false
 			penalty_timer = 0.0
-			sugar_level   = SUGAR_THRESHOLD  # bleed back to safe threshold
+			sugar_level   = SUGAR_THRESHOLD
 			print("✓ Penalty lifted")
+	
+	# Lowered from 2.0 to 0.8 seconds for snappier feedback
+			Message_update.emit("✓ RECOVERED", 0.8)
 
   # ── Natural sugar drain (only below threshold, never penalised) ──
 	if sugar_level > DRAIN_FLOOR and not is_penalized:
@@ -113,17 +124,18 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump
 		jump_sound.play()
 
-	# FIX 2: use get_dash_speed() so dash is also penalised
 	var current_speed := BASE_DASH_SPEED if is_dashing else speed
 
-	if Input.is_action_just_pressed("Dash") and can_dash and not is_dashing:
+	if Input.is_action_just_pressed("Dash") and can_dash and not is_dashing and not is_penalized:
 		apply_effect("dash")
 
 	var direction := Input.get_axis("Move_left", "Move_right")
 	if direction:
 		velocity.x = direction * current_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, current_speed)
+	# If penalized, they slide further (lower the friction)
+		var friction = 0.05 if is_penalized else 1.0 
+		velocity.x = move_toward(velocity.x, 0, current_speed * friction)
 
 	PlayerState.idle    = velocity.x > -1 and velocity.x < 1
 	PlayerState.running = not PlayerState.idle
@@ -143,8 +155,9 @@ func _physics_process(delta: float) -> void:
 func apply_effect(effect_type: String, sugar: float = 0.0) -> void:
 	match effect_type:
 		"speed":
-			consume_sugar(sugar)
+			consume_sugar(sugar,true)
 			speed_bonus = 150.0
+			Message_update.emit("SPEED BOOST!", 1.2)
 			print("Speed boost active! Sugar: ", sugar_level)
 			await get_tree().create_timer(5.0).timeout
 			speed_bonus = 0.0
