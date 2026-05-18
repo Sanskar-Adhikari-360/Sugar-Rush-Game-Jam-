@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://gblgnd8svlvi" path="res://assets/progressBar/progress.png" id="4_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://c3esvs1op2ut7" path="res://assets/progressBar/second_progress.png" id="5_uo2fv"]
 [ext_resource type="FontFile" uid="uid://d100j448l7o2t" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="6_047uy"]
+[ext_resource type="Texture2D" uid="uid://1m2f0jht0g6f" path="res://assets/heart/full.png" id="7_5pdws"]
+[ext_resource type="Texture2D" uid="uid://c7fr4iwtfo14i" path="res://assets/heart/two.png" id="8_hd3ao"]
+[ext_resource type="Texture2D" uid="uid://c0bhnjn8au2m6" path="res://assets/heart/one.png" id="9_0i1j5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5pdws"]
 font = ExtResource("6_047uy")
@@ -20,13 +23,13 @@ anchor_left = 0.90500003
 anchor_top = 0.397
 anchor_right = 0.90500003
 anchor_bottom = 0.397
-offset_left = 0.5999756
-offset_top = -0.83999634
-offset_right = 32.599976
-offset_bottom = 31.160004
+offset_left = 25.599976
+offset_top = 266.16
+offset_right = 57.599976
+offset_bottom = 298.16
 grow_horizontal = 0
 grow_vertical = 2
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 step = 2.0
 fill_mode = 3
 texture_under = ExtResource("2_6fi6k")
@@ -40,11 +43,11 @@ anchor_left = 0.90500003
 anchor_top = 0.39400002
 anchor_right = 0.90500003
 anchor_bottom = 0.39400002
-offset_left = 0.60009766
-offset_top = 1.3199768
-offset_right = 32.600098
-offset_bottom = 33.319977
-scale = Vector2(5, 5)
+offset_left = 25.600098
+offset_top = 268.31998
+offset_right = 57.600098
+offset_bottom = 300.31998
+scale = Vector2(4, 4)
 min_value = 100.0
 max_value = 200.0
 value = 100.0
@@ -62,3 +65,45 @@ offset_top = -0.2800064
 offset_right = 363.83997
 offset_bottom = 15.719994
 label_settings = SubResource("LabelSettings_5pdws")
+
+[node name="Fade" type="ColorRect" parent="." unique_id=1064677333]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FullHeart" type="TextureRect" parent="." unique_id=1612142067]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_right = -80.0
+offset_bottom = 24.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+texture = ExtResource("7_5pdws")
+
+[node name="TwoHeart" type="TextureRect" parent="." unique_id=443410494]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_right = -80.0
+offset_bottom = 24.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+texture = ExtResource("8_hd3ao")
+
+[node name="OneHeart" type="TextureRect" parent="." unique_id=637360134]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_right = -80.0
+offset_bottom = 24.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+texture = ExtResource("9_0i1j5")

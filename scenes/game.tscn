@@ -1,9 +1,60 @@
 [gd_scene format=3 uid="uid://cq0uq6urqdxc7"]
 
 [ext_resource type="Script" uid="uid://bydo2mhi7ke5k" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dg6kuwmnxp3wy" path="res://scenes/main_menu.tscn" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dce42cmarns8o" path="res://scenes/levels/level1.tscn" id="2_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://dgdjsthfn6rkd" path="res://assets/sounds/music.ogg" id="3_lnu2h"]
+[ext_resource type="FontFile" uid="uid://d100j448l7o2t" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="5_iywne"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p57ef"]
+bg_color = Color(0.42352942, 0.48235294, 0.94509804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8569272, 0.8569273, 0.85692716, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Game" type="Node2D" unique_id=1551431578]
 script = ExtResource("1_yqjtg")
 
+[node name="MainMenu" parent="." unique_id=1592309279 instance=ExtResource("2_lbhrr")]
+
 [node name="LevelRoot" parent="." unique_id=1847622087 instance=ExtResource("2_yqjtg")]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=1324988912]
+stream = ExtResource("3_lnu2h")
+autoplay = true
+
+[node name="TimerContainer" type="CanvasLayer" parent="." unique_id=1503926545]
+
+[node name="TimePanel" type="Panel" parent="TimerContainer" unique_id=1219319812]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.0
+offset_right = 112.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p57ef")
+
+[node name="Label" type="Label" parent="TimerContainer/TimePanel" unique_id=884467347]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -11.5
+offset_right = 64.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_iywne")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1

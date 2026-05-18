@@ -6,6 +6,9 @@ extends CharacterBody2D
 
 signal change_progress_bar(value: float)
 signal Message_update(message: String, duration: float)
+signal ChangeHP(HP: int)
+
+var HP:int = 3
 
 @onready var sugar_label: Label = $"../sugar label"
 
@@ -21,6 +24,7 @@ var FALL_GRAVITY := 4500
 
 var is_dashing : bool = false
 var can_dash   : bool = false
+var can_move : bool = true
 
 # ── Temporary powerup bonuses ──────────────────────────────────────────────
 var speed_bonus : float = 0.0
@@ -80,8 +84,6 @@ func consume_sugar(amount: float, silent: bool = false) -> void:
 		is_penalized = true
 		penalty_timer = get_penalty_duration()
 		Message_update.emit("⚠ SUGAR CRASH! ⚠", 0.0)
-	elif not is_penalized and not silent:
-		Message_update.emit("+ Sugar Rush!", 0.6)
 
 	if penalty_timer <= 0.0:
 		is_penalized = false
@@ -92,7 +94,11 @@ func consume_sugar(amount: float, silent: bool = false) -> void:
 func get_gravityy(vel: Vector2) -> int:
 	return GRAVITY if vel.y < 0 else FALL_GRAVITY
 
+func respawn():
+	self.global_position = Vector2(70,178)
+
 func _physics_process(delta: float) -> void:
+	print(HP)
 	sugar_label.text = str(sugar_level)
 
 	if is_penalized:
@@ -102,8 +108,6 @@ func _physics_process(delta: float) -> void:
 			penalty_timer = 0.0
 			sugar_level   = SUGAR_THRESHOLD
 			print("✓ Penalty lifted")
-	
-	# Lowered from 2.0 to 0.8 seconds for snappier feedback
 			Message_update.emit("✓ RECOVERED", 0.8)
 
   # ── Natural sugar drain (only below threshold, never penalised) ──
@@ -119,35 +123,35 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_released("Jump") and velocity.y < 0:
 		velocity.y = jump / 4
+	if can_move:
+		if Input.is_action_just_pressed("Jump") and is_on_floor():
+			velocity.y = jump
+			jump_sound.play()
 
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
-		velocity.y = jump
-		jump_sound.play()
+		var current_speed := BASE_DASH_SPEED if is_dashing else speed
 
-	var current_speed := BASE_DASH_SPEED if is_dashing else speed
+		if Input.is_action_just_pressed("Dash") and can_dash and not is_dashing and not is_penalized:
+			apply_effect("dash")
 
-	if Input.is_action_just_pressed("Dash") and can_dash and not is_dashing and not is_penalized:
-		apply_effect("dash")
+		var direction := Input.get_axis("Move_left", "Move_right")
+		if direction:
+			velocity.x = direction * current_speed
+		else:
+		# If penalized, they slide further (lower the friction)
+			var friction = 0.05 if is_penalized else 1.0 
+			velocity.x = move_toward(velocity.x, 0, current_speed * friction)
 
-	var direction := Input.get_axis("Move_left", "Move_right")
-	if direction:
-		velocity.x = direction * current_speed
-	else:
-	# If penalized, they slide further (lower the friction)
-		var friction = 0.05 if is_penalized else 1.0 
-		velocity.x = move_toward(velocity.x, 0, current_speed * friction)
+		PlayerState.idle    = velocity.x > -1 and velocity.x < 1
+		PlayerState.running = not PlayerState.idle
 
-	PlayerState.idle    = velocity.x > -1 and velocity.x < 1
-	PlayerState.running = not PlayerState.idle
+		animate.play("idle" if PlayerState.idle else "move")
 
-	animate.play("idle" if PlayerState.idle else "move")
+		if direction == 1.0:
+			animate.flip_h = false
+		elif direction == -1.0:
+			animate.flip_h = true
 
-	if direction == 1.0:
-		animate.flip_h = false
-	elif direction == -1.0:
-		animate.flip_h = true
-
-	move_and_slide()
+		move_and_slide()
 
 
 # ── Effects ────────────────────────────────────────────────────────────────
@@ -166,6 +170,7 @@ func apply_effect(effect_type: String, sugar: float = 0.0) -> void:
 		"jump":
 			consume_sugar(sugar)
 			jump_bonus = 250.0
+			Message_update.emit("JUMP BOOST!", 1.2)
 			print("Jump boost active! Sugar: ", sugar_level)
 			await get_tree().create_timer(5.0).timeout
 			jump_bonus = 0.0
@@ -175,6 +180,7 @@ func apply_effect(effect_type: String, sugar: float = 0.0) -> void:
 			consume_sugar(sugar if sugar > 0.0 else 20.0)
 			can_dash = true
 			start_dash()
+			Message_update.emit("DASH ACTIVE!", 1.2)
 			print("Dash active! Sugar: ", sugar_level)
 			await get_tree().create_timer(5.0).timeout
 			can_dash = false
@@ -187,3 +193,8 @@ func start_dash() -> void:
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
+
+
+func take_damage() -> void:
+	HP -= 1
+	ChangeHP.emit(HP)

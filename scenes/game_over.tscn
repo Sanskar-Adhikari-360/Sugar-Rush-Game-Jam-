@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bym6rtuuuel1b"]
+
+[ext_resource type="Script" uid="uid://cjnilit5u4axu" path="res://scripts/game_over.gd" id="1_tbwuq"]
+[ext_resource type="Texture2D" uid="uid://drp8u8f32bdk7" path="res://assets/Background/EvilLarry.jpg" id="1_xeevv"]
+[ext_resource type="FontFile" uid="uid://d100j448l7o2t" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_wqhvx"]
+
+[node name="GameOver" type="Control" unique_id=1807339808]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tbwuq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1880616763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1742379898]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -360.0
+offset_right = 296.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xeevv")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1441451553]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -16.0
+offset_right = -62.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+theme_override_colors/font_color = Color(1, 0.14901961, 0.14901961, 0)
+theme_override_fonts/font = ExtResource("2_wqhvx")
+text = "GAME OVER"
+
+[node name="Label2" type="Label" parent="." unique_id=1097427093]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = 53.0
+offset_right = 184.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_fonts/font = ExtResource("2_wqhvx")
+text = "Press any key to continue"
