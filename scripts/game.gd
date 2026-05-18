@@ -31,7 +31,7 @@ func load_level(level_number:int) -> void:
 	if current_level_root:
 		current_level_root.queue_free()
 	#change the level
-	if level <= 2:
+	if level <= 3:
 		var level_path = "res://scenes/levels/level%s.tscn" % level_number
 		current_level_root = load(level_path).instantiate()
 		add_child(current_level_root)

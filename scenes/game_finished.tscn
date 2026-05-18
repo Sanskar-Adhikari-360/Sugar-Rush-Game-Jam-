@@ -2,8 +2,20 @@
 
 [ext_resource type="Script" uid="uid://c3pec7ixlcn72" path="res://scripts/game_finished.gd" id="1_5t2yd"]
 [ext_resource type="Texture2D" uid="uid://p8mg01lk3t73" path="res://assets/Background/GameFinished1.jpg" id="1_ou354"]
+[ext_resource type="Texture2D" uid="uid://4qnpu1ejkvyl" path="res://assets/Background/Blue.png" id="2_ac0vs"]
 [ext_resource type="Texture2D" uid="uid://560vllly41wm" path="res://assets/Background/GameFinished2.jpg" id="2_o2l72"]
 [ext_resource type="FontFile" uid="uid://d100j448l7o2t" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_o2l72"]
+[ext_resource type="AudioStream" uid="uid://b8o14ou65sfqo" path="res://assets/sounds/winSound_clip.wav" id="6_by855"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ac0vs"]
+bg_color = Color(0.28235295, 0.46666667, 0.7607843, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_by855"]
+bg_color = Color(0, 0.38431373, 1, 1)
 
 [node name="GameFinished" type="Control" unique_id=668538015]
 layout_mode = 3
@@ -14,13 +26,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5t2yd")
 
-[node name="Panel" type="Panel" parent="." unique_id=388190323]
+[node name="Panel" type="TextureRect" parent="." unique_id=1069946659]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_ac0vs")
+stretch_mode = 1
 
 [node name="Image2" type="TextureRect" parent="." unique_id=780731638]
 layout_mode = 1
@@ -96,3 +110,21 @@ Level 3: 00:00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="." unique_id=1170200148]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 464.0
+offset_right = 997.0
+offset_bottom = 515.0
+theme_override_fonts/font = ExtResource("4_o2l72")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_ac0vs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_by855")
+text = "YIPEEE!!"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2106497529]
+stream = ExtResource("6_by855")
+autoplay = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

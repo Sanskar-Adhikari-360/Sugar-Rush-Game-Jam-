@@ -11,7 +11,6 @@ signal ChangeHP(HP: int)
 
 var HP:int = 3
 
-@onready var sugar_label: Label = $"../sugar label"
 
 var m: String
 
@@ -101,9 +100,11 @@ func respawn():
 		self.global_position = Vector2(70,178)
 	if game.level == 2:
 		self.global_position = Vector2(857,-799)
+	if game.level == 3:
+		self.global_position = Vector2(4534,-2239)
 
 func _physics_process(delta: float) -> void:
-	sugar_label.text = str(sugar_level)
+	print(self.global_position)
 
 	if is_penalized:
 		penalty_timer -= delta
