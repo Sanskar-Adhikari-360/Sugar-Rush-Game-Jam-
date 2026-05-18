@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cjnilit5u4axu" path="res://scripts/game_over.gd" id="1_tbwuq"]
 [ext_resource type="Texture2D" uid="uid://drp8u8f32bdk7" path="res://assets/Background/EvilLarry.jpg" id="1_xeevv"]
 [ext_resource type="FontFile" uid="uid://d100j448l7o2t" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_wqhvx"]
-[ext_resource type="AudioStream" uid="uid://p0e8nok51xu1" path="res://assets/sounds/Evil larry.mp3" id="4_racf3"]
 
 [node name="GameOver" type="Control" unique_id=1807339808]
 layout_mode = 3
@@ -76,8 +75,3 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0)
 theme_override_fonts/font = ExtResource("2_wqhvx")
 text = "Press any key to continue"
-
-[node name="Larry" type="AudioStreamPlayer2D" parent="." unique_id=1834660031]
-stream = ExtResource("4_racf3")
-volume_db = 24.0
-autoplay = true

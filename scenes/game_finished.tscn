@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://cflxkv5h63mqb"]
+
+[ext_resource type="Script" uid="uid://c3pec7ixlcn72" path="res://scripts/game_finished.gd" id="1_5t2yd"]
+[ext_resource type="Texture2D" uid="uid://p8mg01lk3t73" path="res://assets/Background/GameFinished1.jpg" id="1_ou354"]
+[ext_resource type="Texture2D" uid="uid://560vllly41wm" path="res://assets/Background/GameFinished2.jpg" id="2_o2l72"]
+[ext_resource type="FontFile" uid="uid://d100j448l7o2t" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_o2l72"]
+
+[node name="GameFinished" type="Control" unique_id=668538015]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5t2yd")
+
+[node name="Panel" type="Panel" parent="." unique_id=388190323]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image2" type="TextureRect" parent="." unique_id=780731638]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -327.15787
+offset_right = -8.0
+offset_bottom = 327.15784
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_o2l72")
+expand_mode = 1
+
+[node name="Image1" type="TextureRect" parent="." unique_id=1360827863]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -327.15787
+offset_right = -8.0
+offset_bottom = 327.15784
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ou354")
+expand_mode = 1
+
+[node name="GameFinished" type="Label" parent="." unique_id=226478489]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.512
+anchor_top = 0.089
+anchor_right = 0.512
+anchor_bottom = 0.089
+offset_left = 0.6399536
+offset_top = -0.08000183
+offset_right = 584.13995
+offset_bottom = 136.67
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_o2l72")
+theme_override_font_sizes/font_size = 32
+text = "GAME FINISHED!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true
+
+[node name="GameFinished2" type="Label" parent="." unique_id=2060275429]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.512
+anchor_top = 0.089
+anchor_right = 0.512
+anchor_bottom = 0.089
+offset_left = 0.6399536
+offset_top = 167.92
+offset_right = 584.13995
+offset_bottom = 375.91998
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 16
+theme_override_fonts/font = ExtResource("4_o2l72")
+theme_override_font_sizes/font_size = 26
+text = "Level 1: 00:00:00
+Level 2: 00:00:00
+Level 3: 00:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true

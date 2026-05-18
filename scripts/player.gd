@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var game: Node2D = $"../.."
 
 @onready var animate: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
@@ -95,10 +96,13 @@ func get_gravityy(vel: Vector2) -> int:
 	return GRAVITY if vel.y < 0 else FALL_GRAVITY
 
 func respawn():
-	self.global_position = Vector2(70,178)
+	print(game.level)
+	if game.level == 1:
+		self.global_position = Vector2(70,178)
+	if game.level == 2:
+		self.global_position = Vector2(857,-799)
 
 func _physics_process(delta: float) -> void:
-	print(HP)
 	sugar_label.text = str(sugar_level)
 
 	if is_penalized:

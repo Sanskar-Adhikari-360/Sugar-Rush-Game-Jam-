@@ -15,6 +15,10 @@ run/main_scene="uid://dg6kuwmnxp3wy"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://dsul403jpq7ns"
+
 [display]
 
 window/size/viewport_width=1280
@@ -23,6 +27,10 @@ window/size/viewport_height=720
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_xterm/plugin.cfg")
+
+[filesystem]
+
+import/autoload_on_startup=false
 
 [input]
 

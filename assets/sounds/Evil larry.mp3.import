@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://p0e8nok51xu1"
+path="res://.godot/imported/Evil larry.mp3-dd9046170da67bdf14d7fd83270dd877.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Evil larry.mp3"
+dest_files=["res://.godot/imported/Evil larry.mp3-dd9046170da67bdf14d7fd83270dd877.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

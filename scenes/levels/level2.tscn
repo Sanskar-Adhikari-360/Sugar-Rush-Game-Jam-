@@ -354,7 +354,7 @@ tile_map_data = PackedByteArray("AADg//D/AAAPAAUAAADg//H/AAAPAAUAAADg//L/AAAPAAU
 tile_set = SubResource("TileSet_dd0lh")
 
 [node name="Player" parent="." unique_id=158985382 instance=ExtResource("3_gycjm")]
-position = Vector2(285.66666, -303.3333)
+position = Vector2(292, -298.66666)
 
 [node name="Food" type="Node2D" parent="." unique_id=1869928212]
 
